@@ -133,6 +133,8 @@ public final class StatCommand implements CommandExecutor {
         private String subStatName;
         private Target target;
         private String playerName;
+        private boolean includeSenderInTopList;
+
         private StatRequest<?> request;
 
         private ArgProcessor(CommandSender sender, String[] args) {
@@ -142,6 +144,7 @@ public final class StatCommand implements CommandExecutor {
             extractStatistic();
             extractSubStatistic();
             extractTarget();
+            tryToFindKeyword();
             combineProcessedArgsIntoRequest();
         }
 
@@ -155,7 +158,7 @@ public final class StatCommand implements CommandExecutor {
                     switch (target) {
                 case PLAYER -> new PlayerStatRequest(sender, playerName);
                 case SERVER -> new ServerStatRequest(sender);
-                case TOP -> new TopStatRequest(sender, config.getTopListMaxSize());
+                case TOP -> new TopStatRequest(sender, config.getTopListMaxSize(), includeSenderInTopList);
             };
 
             switch (statistic.getType()) {
@@ -263,6 +266,14 @@ public final class StatCommand implements CommandExecutor {
             }
             this.subStatName = subStatName;
             argsToProcess = removeArg(subStatName);
+        }
+
+        private void tryToFindKeyword() {
+            if (Arrays.stream(argsToProcess).anyMatch(
+                    arg -> arg.equalsIgnoreCase("add-myself"))) {
+                this.includeSenderInTopList = sender instanceof Player &&
+                        offlinePlayerHandler.isIncludedPlayer(sender.getName());
+            }
         }
 
         @Contract(pure = true)

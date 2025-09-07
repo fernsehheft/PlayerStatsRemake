@@ -21,6 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.BiFunction;
+import java.util.stream.Collectors;
 
 import static net.kyori.adventure.text.Component.*;
 
@@ -365,8 +366,10 @@ public final class MessageBuilder implements StatTextFormatter {
      * as is.
      */
     public @NotNull FormattingFunction formattedTopStatFunction(@NotNull LinkedHashMap<String, Integer> topStats, @NotNull StatRequest.Settings request) {
+        //TODO add logic to calculate top number correctly
+
         final TextComponent title = getTopStatTitle(topStats.size(), request.getStatistic(), request.getSubStatEntryName());
-        final TextComponent list = getTopStatListComponent(topStats, request.getStatistic());
+        final TextComponent list = getTopStatListComponent(topStats, request);
         final boolean useEnters = config.useEnters(Target.TOP, false);
         final boolean useEntersForShared = config.useEnters(Target.TOP, true);
 
@@ -474,25 +477,36 @@ public final class MessageBuilder implements StatTextFormatter {
         }
     }
 
-    private @NotNull TextComponent getTopStatListComponent(@NotNull LinkedHashMap<String, Integer> topStats, Statistic statistic) {
+    private @NotNull TextComponent getTopStatListComponent(@NotNull LinkedHashMap<String, Integer> topStats, StatRequest.Settings request) {
         TextComponent.Builder topList = Component.text();
-        Set<String> playerNames = topStats.keySet();
-        boolean useDots = config.useDots();
+        Set<String> playerNames = topStats.keySet()
+                .stream()
+                .limit(request.getTopListSize())
+                .collect(Collectors.toSet());
 
         int count = 0;
         for (String playerName : playerNames) {
-            topList.append(newline());
-            if (useDots) {
-                topList.append(getTopStatLineComponent(
-                        ++count, playerName, getStatNumberComponent(topStats.get(playerName), Target.TOP, statistic)));
-            } else {
-                topList.append(space())
-                        .append(componentFactory.rankNumber(++count))
-                        .append(space())
-                        .append(componentFactory.playerName(playerName + ":", Target.TOP))
-                        .append(space()).append(getStatNumberComponent(topStats.get(playerName), Target.TOP, statistic));
+            topList.append(newline())
+                   .append(getTopStatLineComponent(
+                           ++count,
+                           playerName,
+                           getStatNumberComponent(topStats.get(playerName), Target.TOP, request.getStatistic()
+                   )));
+        }
+
+        if (request.includeCommandSenderInTopList()) {
+            String senderName = request.getCommandSender().getName();
+            int rank = topStats.keySet().stream().toList().indexOf(senderName) + 1;
+            if (rank >= request.getTopListSize()) {
+                topList.append(newline())
+                        .append(getTopStatLineComponent(
+                                rank,
+                                senderName,
+                                getStatNumberComponent(topStats.get(senderName), Target.TOP, request.getStatistic()
+                        )));
             }
         }
+
         return topList.build();
     }
 
@@ -506,7 +520,7 @@ public final class MessageBuilder implements StatTextFormatter {
                 .append(space())
                 .append(componentFactory.playerName(fullPlayerName, Target.TOP));
 
-        if (config.useDots()) {
+        if (useDots) {
             int dots = getNumberOfDotsToAlign(positionInTopList + ". " + playerName);
             if (dots >= 1) {
                 topStatLineBuilder

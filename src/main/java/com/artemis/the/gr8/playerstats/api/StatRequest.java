@@ -41,9 +41,10 @@ public abstract class StatRequest<T> {
     this.settings.target = Target.SERVER;
   }
 
-  protected void configureForTop(int topListSize) {
+  protected void configureForTop(int topListSize, boolean includeSender) {
     this.settings.target = Target.TOP;
     this.settings.topListSize = topListSize;
+    this.settings.includeSender = includeSender;
   }
 
   protected void configureUntyped(@NotNull Statistic statistic) {
@@ -105,6 +106,7 @@ public abstract class StatRequest<T> {
     private String playerName;
     private Target target;
     private int topListSize;
+    private boolean includeSender;
 
     private String subStatEntryName;
     private EntityType entity;
@@ -144,6 +146,10 @@ public abstract class StatRequest<T> {
 
     public int getTopListSize() {
       return this.topListSize;
+    }
+
+    public boolean includeCommandSenderInTopList() {
+        return this.includeSender;
     }
 
     public EntityType getEntity() {

@@ -14,12 +14,16 @@ import java.util.LinkedHashMap;
 public final class TopStatRequest extends StatRequest<LinkedHashMap<String, Integer>> implements RequestGenerator<LinkedHashMap<String, Integer>> {
 
     public TopStatRequest(int topListSize) {
-        this(Bukkit.getConsoleSender(), topListSize);
+        this(Bukkit.getConsoleSender(), topListSize, false);
     }
 
     public TopStatRequest(CommandSender sender, int topListSize) {
+        this(sender, topListSize, false);
+    }
+
+    public TopStatRequest(CommandSender sender, int topListSize, boolean includeSender) {
         super(sender);
-        super.configureForTop(topListSize);
+        super.configureForTop(topListSize, includeSender);
     }
 
     @Override
