@@ -17,7 +17,7 @@ public final class ConsoleComponentFactory extends ComponentFactory {
     @Override
     public TextComponent heart() {
         return Component.text()
-                .content(String.valueOf('\u2665'))
+                .content(String.valueOf('♥'))
                 .color(HEARTS)
                 .build();
     }

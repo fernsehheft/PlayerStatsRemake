@@ -205,10 +205,9 @@ public final class OutputManager implements Reloadable, Closable {
     }
 
     private @Nullable ComponentFactory getFestiveFactory() {
-        if (config.useRainbowMode()) {
-            return new PrideComponentFactory();
-        }
-        else if (config.useFestiveFormatting()) {
+        String theme = config.getTheme();
+
+        if (theme.equalsIgnoreCase("default") && config.useFestiveFormatting()) {
             return switch (LocalDate.now().getMonth()) {
                 case JUNE -> new PrideComponentFactory();
                 case OCTOBER -> new HalloweenComponentFactory();
@@ -221,6 +220,18 @@ public final class OutputManager implements Reloadable, Closable {
                 case DECEMBER -> new WinterComponentFactory();
                 default -> null;
             };
+        }
+        else if (theme.equalsIgnoreCase("pride")) {
+            return new PrideComponentFactory();
+        }
+        else if (theme.equalsIgnoreCase("halloween")) {
+            return new HalloweenComponentFactory();
+        }
+        else if (theme.equalsIgnoreCase("winter")) {
+            return new WinterComponentFactory();
+        }
+        else if (theme.equalsIgnoreCase("birthday")) {
+            return new BirthdayComponentFactory();
         }
         return null;
     }

@@ -21,7 +21,7 @@ public final class ConfigHandler extends YamlFileHandler {
         super("config.yml");
         config = super.getFileConfiguration();
 
-        configVersion = 8;
+        configVersion = 9;
         checkAndUpdateConfigVersion();
         MyLogger.setDebugLevel(getDebugLevel());
     }
@@ -170,12 +170,11 @@ public final class ConfigHandler extends YamlFileHandler {
     }
 
     /**
-     * Whether to use rainbow colors for the [PlayerStats] prefix rather than the
-     * default gold/purple
-     * @return the config setting (default: false)
+     * The theme PlayerStats should use
+     * @return the chosen theme (default: none)
      */
-    public boolean useRainbowMode() {
-        return config.getBoolean("rainbow-mode", false);
+    public String getTheme() {
+        return config.getString("use-theme", "default");
     }
 
     /**

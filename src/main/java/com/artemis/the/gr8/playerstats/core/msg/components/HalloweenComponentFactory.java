@@ -16,8 +16,8 @@ public final class HalloweenComponentFactory extends ComponentFactory {
     public TextComponent pluginPrefixAsTitle() {
         return miniMessageToComponent(
                 "<gradient:#ff9300:#f74040:#f73b3b:#ff9300:#f74040:#ff9300>" +
-                "<white>\u2620</white> __________    [PlayerStats]    __________ " +
-                "<white>\u2620</white></gradient>");
+                "<white>☠</white> __________    [PlayerStats]    __________ " +
+                "<white>☠</white></gradient>");
     }
 
     @Override

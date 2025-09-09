@@ -1,7 +1,7 @@
 # ------------------------------------------------------------------------------------------------------ #
 #                                     PlayerStats Configuration                                          #
 # ------------------------------------------------------------------------------------------------------ #
-config-version: 8
+config-version: 9
 
 
 #                                # ------------------------------- #                                     #
@@ -53,8 +53,8 @@ enable-hover-text: true
 # Automatically use themed formatting for the duration of certain holidays or festivals
 enable-festive-formatting: true
 
-# Always use the rainbow theme
-rainbow-mode: false
+# Always use one of PlayerStat's themes. Available options are: Default, Pride, Halloween, and Winter
+use-theme: default
 
 # Start the below stat-results with an empty line in chat before the result
 use-enters:

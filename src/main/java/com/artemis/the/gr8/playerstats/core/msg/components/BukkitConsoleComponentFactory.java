@@ -48,7 +48,7 @@ public final class BukkitConsoleComponentFactory extends ComponentFactory {
     @Override
     public TextComponent heart() {
         return text()
-                .content(String.valueOf('\u2665'))
+                .content(String.valueOf('♥'))
                 .color(HEARTS)
                 .build();
     }

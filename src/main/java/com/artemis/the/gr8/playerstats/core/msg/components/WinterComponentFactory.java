@@ -12,8 +12,8 @@ public final class WinterComponentFactory extends ComponentFactory {
     public TextComponent pluginPrefixAsTitle() {
         return miniMessageToComponent(
                 "<gradient:#4f20f7:#4bc3fa:#05ebb1:#4f20f7>" +
-                        "<#D6F1FE>\u2744</#D6F1FE> __________    [PlayerStats]    __________ " +
-                        "<#D6F1FE>\u2744</#D6F1FE></gradient>");
+                        "<#D6F1FE>❄</#D6F1FE> __________    [PlayerStats]    __________ " +
+                        "<#D6F1FE>❄</#D6F1FE></gradient>");
     }
 
     @Override

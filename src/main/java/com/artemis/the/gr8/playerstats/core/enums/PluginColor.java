@@ -6,9 +6,6 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * This enum represents the colorscheme PlayerStats uses in its output messages.
- * The first set of colors is used throughout the plugin, while the set of NAME-colors
- * represents the colors that player-names can be in the "shared by player-name"
- * section of shared statistics
  */
 public enum PluginColor {
     /**
