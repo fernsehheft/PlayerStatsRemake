@@ -27,7 +27,6 @@ public final class EnumHandler {
     private static List<String> blockNames;
     private static List<String> itemNames;
     private static List<String> itemsThatCanBreak;
-    private static List<String> entityNames;
     private static List<String> entitiesThatCanDie;
     private static List<String> statNames;
     private static List<String> subStatNames;
@@ -66,13 +65,6 @@ public final class EnumHandler {
 
     public List<String> getAllItemsThatCanBreak() {
         return itemsThatCanBreak;
-    }
-
-    /**
-     * @return a list with entityNames in lowercase
-     */
-    public List<String> getAllEntityNames() {
-        return entityNames;
     }
 
     public List<String> getAllEntitiesThatCanDie() {
@@ -221,12 +213,7 @@ public final class EnumHandler {
                 .map(string -> string.toLowerCase(Locale.ENGLISH))
                 .collect(Collectors.toList());
 
-        entityNames = Arrays.stream(EntityType.values())
-                .map(EntityType::toString)
-                .map(string -> string.toLowerCase(Locale.ENGLISH))
-                .filter(entityName -> !entityName.equalsIgnoreCase("unknown"))
-                .collect(Collectors.toList());
-
+        //the only entity-statistics are KILL_ENTITY and ENTITY_KILLED_BY, so only alive entities are relevant
         entitiesThatCanDie = Arrays.stream(EntityType.values())
                 .parallel()
                 .filter(EntityType::isAlive)
@@ -234,7 +221,7 @@ public final class EnumHandler {
                 .map(string -> string.toLowerCase(Locale.ENGLISH))
                 .collect(Collectors.toList());
 
-        subStatNames = Stream.of(blockNames, entityNames, itemNames)
+        subStatNames = Stream.of(blockNames, entitiesThatCanDie, itemNames)
                 .flatMap(Collection::stream)
                 .distinct()
                 .collect(Collectors.toList());

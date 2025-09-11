@@ -81,8 +81,7 @@ public final class MyLogger {
 
     /**
      * Log the encountered exception as a warning to console,
-     * with some information about which class/method caught it
-     * and with a printStackTrace if DebugLevel is HIGH.
+     * with some information about which class/method caught it.
      *
      * @param exception The encountered exception
      * @param caughtBy The name of the class that caught the exception
@@ -92,11 +91,7 @@ public final class MyLogger {
     public static void logException(@NotNull Exception exception, String caughtBy, @Nullable String additionalInfo) {
         String extraInfo = (additionalInfo != null) ? " [" + additionalInfo + "]" : "";
         String info =  " (" + caughtBy + extraInfo + ")";
-
         logger.warning(exception + info);
-        if (debugLevel == DebugLevel.HIGH) {
-            exception.printStackTrace();
-        }
     }
 
     /**
