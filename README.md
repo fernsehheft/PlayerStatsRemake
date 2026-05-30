@@ -1,5 +1,5 @@
 <p align="center">
-   <img src="src/main/resources/images/logo_gray_rounded.png">
+   <img src="src/main/resources/images/logo.png">
 </p>
 
 <h1 align="center">PlayerStatsRemake</h1>
