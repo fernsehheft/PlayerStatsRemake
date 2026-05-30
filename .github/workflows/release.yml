@@ -1,0 +1,83 @@
+name: Auto Release on Version Bump
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'src/main/resources/plugin.yml'
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Needed to create a release
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Required to check existing tags
+
+      - name: Extract Version from plugin.yml
+        id: extract_version
+        run: |
+          # Extrahiert die Version aus der plugin.yml (ignoriert Leerzeichen und Anführungszeichen)
+          VERSION=$(grep '^version:' src/main/resources/plugin.yml | awk '{print $2}' | tr -d '"'\'' ')
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "Extracted version: $VERSION"
+
+      - name: Check if Release already exists
+        id: check_release
+        run: |
+          if git ls-remote --tags origin | grep -q "refs/tags/${{ env.VERSION }}$"; then
+            echo "Release for version ${{ env.VERSION }} already exists. Skipping..."
+            echo "skip=true" >> $GITHUB_ENV
+          else
+            echo "skip=false" >> $GITHUB_ENV
+          fi
+
+      - name: Setup Java 17
+        if: env.skip == 'false'
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+
+      - name: Sync pom.xml version
+        if: env.skip == 'false'
+        run: |
+          # Synchronisiert die Maven-Version automatisch mit der plugin.yml Version
+          mvn versions:set -DnewVersion=${{ env.VERSION }}
+          mvn versions:commit
+
+      - name: Build Plugin
+        if: env.skip == 'false'
+        run: mvn clean package -DskipTests
+
+      - name: Create GitHub Release
+        if: env.skip == 'false'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: "${{ env.VERSION }}"
+          name: "PlayerStatsRemake v${{ env.VERSION }}"
+          generate_release_notes: true
+          body: |
+            🚀 **PlayerStatsRemake v${{ env.VERSION }}** has been released!
+            
+            ### 💻 API Usage (JitPack)
+            To use this version in your own plugin, add JitPack to your repositories and use the following dependency:
+            
+            ```xml
+            <dependency>
+                <groupId>com.github.Fernsehheft</groupId>
+                <artifactId>PlayerStatsRemake</artifactId>
+                <version>${{ env.VERSION }}</version>
+                <scope>provided</scope>
+            </dependency>
+            ```
+          files: target/PlayerStatsRemake-${{ env.VERSION }}.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -24,11 +24,11 @@
 
 **PlayerStatsRemake** is a fork of the popular [PlayerStats](https://github.com/itHotL/PlayerStats) plugin originally created by [Artemis_the_gr8](https://github.com/Artemis-the-gr8). Since the original project is no longer actively maintained, this fork was created to:
 
-- ✅ Fix all open GitHub issues from the original repository
-- ✅ Merge all pending pull requests
-- ✅ Add Folia server support
-- ✅ Modernize the codebase (Java 17, Paper API)
-- ✅ Keep the plugin up-to-date with new Minecraft versions
+- ✅ Fixed most GitHub issues from the original repository
+- ✅ Merged all pending pull requests
+- ✅ Added Folia server support
+- ✅ Modernized the codebase (Java 17, Paper API)
+- ✅ Kept the plugin up-to-date with new Minecraft versions
 
 > **Credits:** All original work, design, and concept belongs to **Artemis_the_gr8**. This fork is released under the same [MIT License](LICENSE).  
 > Original repository: https://github.com/itHotL/PlayerStats
