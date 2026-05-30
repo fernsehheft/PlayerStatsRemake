@@ -2,117 +2,182 @@
    <img src="src/main/resources/images/logo_gray_rounded.png">
 </p>
 
+<h1 align="center">PlayerStatsRemake</h1>
 
-## About
-PlayerStats is a Minecraft server plugin that adds a command to view player statistics in 
-top-10 format or individually. Currently tested on all versions between **1.16.5** and **1.21.8** on platforms:
-- Bukkit
-- Spigot
-- Paper
-- Purpur
+<p align="center">
+  <strong>A modern, actively maintained fork of <a href="https://github.com/itHotL/PlayerStats">PlayerStats</a> by Artemis_the_gr8</strong>
+  <br>
+  All open issues fixed · All pull requests merged · Folia support · Java 17 · Paper API
+</p>
 
-(It's possible PlayerStats works on other platforms too, but these are the ones I have explicitly tested.)
+<p align="center">
+  <a href="https://github.com/itHotL/PlayerStats"><img src="https://img.shields.io/badge/Based%20on-PlayerStats%20by%20Artemis-blue" alt="Based on PlayerStats"></a>
+  <img src="https://img.shields.io/badge/License-MIT-green" alt="MIT License">
+  <img src="https://img.shields.io/badge/Java-17-orange" alt="Java 17">
+  <img src="https://img.shields.io/badge/API-Paper%201.20%2B-blueviolet" alt="Paper API">
+  <img src="https://img.shields.io/badge/Folia-supported-brightgreen" alt="Folia Supported">
+</p>
 
 &nbsp;
 
-## Features 
+## 🔱 About this Fork
+
+**PlayerStatsRemake** is a fork of the popular [PlayerStats](https://github.com/itHotL/PlayerStats) plugin originally created by [Artemis_the_gr8](https://github.com/Artemis-the-gr8). Since the original project is no longer actively maintained, this fork was created to:
+
+- ✅ Fix all open GitHub issues from the original repository
+- ✅ Merge all pending pull requests
+- ✅ Add Folia server support
+- ✅ Modernize the codebase (Java 17, Paper API)
+- ✅ Keep the plugin up-to-date with new Minecraft versions
+
+> **Credits:** All original work, design, and concept belongs to **Artemis_the_gr8**. This fork is released under the same [MIT License](LICENSE).  
+> Original repository: https://github.com/itHotL/PlayerStats
+
+&nbsp;
+
+## About
+
+PlayerStatsRemake is a Minecraft server plugin that adds commands to view player statistics in top-x format, individually, or as a server-wide total. Tested on **Paper 1.20+**, **Purpur**, and **Folia**.
+
+**Supported platforms:**
+- Paper ✅ (primary)
+- Spigot ✅
+- Purpur ✅
+- Folia ✅ (new in this fork)
+- Bukkit ⚠️ (may work, not officially tested)
+
+&nbsp;
+
+## What's New in PlayerStatsRemake
+
+### Bug Fixes (from original issues)
+| Issue | Description | Status |
+|-------|-------------|--------|
+| [#175](https://github.com/itHotL/PlayerStats/issues/175) | `NullPointerException` when looking up stats for new entities like `happy_ghast` | ✅ Fixed |
+| [#164](https://github.com/itHotL/PlayerStats/issues/164) | 42-second startup delay on Purpur 1.21.5 | ✅ Fixed |
+
+### Merged Pull Requests
+| PR | Description | Status |
+|----|-------------|--------|
+| [#170](https://github.com/itHotL/PlayerStats/pull/170) | Folia support + Paper API migration | ✅ Merged |
+| [#174](https://github.com/itHotL/PlayerStats/pull/174) | Bukkit events for DiscordSRV integration | ✅ Merged |
+
+### New Features
+- **`StatCalculatedEvent`** – fired after every stat lookup (useful for DiscordSRV, logging, etc.)
+- **`StatSharedEvent`** – cancellable event when a player shares results in chat
+
+&nbsp;
+
+## Features
+
 * **Easy to use**
   - One central command that can:
     - Explain **how to use** the plugin with `/statistic`
-      ![Usage](src/main/resources/images/usage.png)
     - Show you the **top 10** on your server for all possible statistics with `/statistic ... top`
-      ![Top_10](src/main/resources/images/top_10.png)
     - See those same statistics for any **individual player** with `/statistic ... player`
-      ![Individual_Stat](src/main/resources/images/individual_stat.png)
-    - Or look up the **combined total** of everyone on your server
-      ![New_Numbers](src/main/resources/images/new_numbers.png)
+    - Look up the **combined total** of everyone on your server
     - Guide you through the available options while you type with an extensive **tab-complete** feature
-      ![Tab_Complete](src/main/resources/images/tab_complete.png)
-    - See the output in a **readable format** that makes sense in the Minecraft world, with more information in hover-text:
-      ![Damage_Format](src/main/resources/images/damage_format.png)
-    - **Share statistics** that you look up with the other players in chat:
-      ![Shared_Top_10](src/main/resources/images/shared_top_10.png)
-
+    - See the output in a **readable format** with hover-text for more info
+    - **Share statistics** in chat with a click
 
 * **No set-up required**
-   - PlayerStats will work correctly regardless of how long your server has already existed - it doesn't 
-     have to be present when you start a new world
-   - Data is retrieved directly from already existing playerfiles, so you don't have to 
-     set up a database, use scoreboards, or anything of the sort
-
+   - Works regardless of how long your server has existed
+   - Data is retrieved directly from existing playerfiles — no database needed
 
 * **PlaceholderAPI support**
-   - Placeholders are added in a separate expansion, which can be found on [GitHub](https://github.com/Artemis-the-gr8/PlayerStatsExpansion), in the PlaceholderAPI [eCloud](https://api.extendedclip.com/expansions/playerstatsexpansion/), or downloaded in-game with `/papi ecloud download PlayerStats`
-   - For more information about the placeholders, see the expansion's [GitHub](https://github.com/Artemis-the-gr8/PlayerStatsExpansion)!
+   - Placeholders are added in a separate expansion, found on [GitHub](https://github.com/Artemis-the-gr8/PlayerStatsExpansion) or via `/papi ecloud download PlayerStats`
 
+* **Safe & Fast**
+   - Uses **multi-threading** to ensure server performance doesn't suffer
+   - Players cannot crash the server by spamming commands
 
-* **Safe**
-   - PlayerStats uses **multi-threading** to ensure server performance does not suffer and 
-     players cannot crash the server by spamming its commands
-   - This also means that calculating statistics will be very **fast**    
+* **Customizable**
+    - Choose which **range of units** to display time-, damage- and distance-based statistics in
+    - **Automatically translate** statistics to the language of the client
+    - Festive formatting, rainbow mode
+    - Only show statistics for **whitelisted** players / exclude **banned** players
+    - Exclude specific players with `/statexclude`
+    - Limit who can **share statistics** and how often
+    - Limit statistics based on when a player **last joined**
+    - Custom **colors** including **hex colors**
+    - Additional **style** options (italics, etc.)
 
+&nbsp;
 
-* **Customizable**  
-    - You can customize the following (and more):
-      - Choose which **range of units** you want to display your time-, damage- and distance-based statistics in:
-        ![Time_Format](src/main/resources/images/time_format.png)
-      - **Automatically translate** statistics to the language of the client that views them, or customize the statistic-names through the **language.yml** file
-      - Use festive formatting, or enable rainbow mode whenever!
-        ![Translated](src/main/resources/images/translated.png)   
-      - Only show statistics for **whitelisted** players
-      - Exclude statistics from **banned** players
-      - Exclude statistics from specific players with `/statexclude`
-      - Limit who is allowed to **share statistics** in chat and how often players can share
-      - Limit statistics based on when a player **last joined**.  
-        This option can be particularly useful if you have had a lot of players join your server in the past
-        whose statistics aren't of particular interest to your current player-base.
-        On top of that, limiting the amount of players shown in the top 10 can greatly increase performance speed.
-      - The **colors** you want the output to be
-      - You can go for default Minecraft chat colors, or use **hex colors**!
-      - Whether you want the output to have additional **style**, such as italics 
-    - You can configure the following **permissions**:
-      - `playerstats.stat` for using the general command (true for everyone by default)
-      - `playerstats.share` for sharing statistics in chat (true for everyone by default)
-      - `playerstats.reload` for reloading the config (only for OP players by default)
-      - `playerstats.exclude` to exclude players from top- and server-statistics (only for OP players by default)
+## Permissions
+
+> ⚠️ **Note:** Permissions have changed from the original plugin!
+
+| Permission | Description | Default |
+|---|---|---|
+| `playerstatsremake.stat` | Use `/statistic` | everyone |
+| `playerstatsremake.share` | Share statistics in chat | everyone |
+| `playerstatsremake.reload` | Reload the config with `/statreload` | OP only |
+| `playerstatsremake.exclude` | Exclude players with `/statexclude` | OP only |
 
 &nbsp;
 
 ## API Usage
-To import the PlayerStats API with Maven, add the following dependency and repository to your POM.xnl:
+
+> **Note:** This fork uses a different package path than the original. If you were using the original PlayerStats API, update your imports.
 
 ```xml
-<repositories>
-    <repository>
-        <id>sonatype-oss-snapshots1</id> <!-- the OSSRH repository for snapshots -->
-        <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
-     </repository>
-</repositories>
- 
-<dependencies>
-    <dependency>
-        <groupId>io.github.ithotl</groupId>
-        <artifactId>PlayerStats</artifactId>
-        <version>2.0-SNAPSHOT</version>
-        <scope>provided</scope>
-    </dependency>
-</dependencies>
+<!-- In your pom.xml -->
+<dependency>
+    <groupId>com.fernsehheft</groupId>
+    <artifactId>PlayerStatsRemake</artifactId>
+    <version>1.0.0</version>
+    <scope>provided</scope>
+</dependency>
 ```
-You can download the sources and Javadocs through your code editor, or visit the Javadocs [here](https://s01.oss.sonatype.org/service/local/repositories/snapshots/archive/io/github/ithotl/PlayerStats/2.0-SNAPSHOT/PlayerStats-2.0-20230228.110241-1-javadoc.jar/!/com/artemis/the/gr8/playerstats/api/PlayerStats.html).  
-To get an instance of the API, you can do the following:
+
+To get an instance of the API:
 
 ```java
-PlayerStats playerStats = PlayerStats.getAPI();
+// Import from the new package
+import com.fernsehheft.playerstatsremake.api.PlayerStatsRemake;
+
+PlayerStatsRemake api = PlayerStatsRemake.getAPI();
+```
+
+### Listening to Events (new in this fork)
+
+```java
+// Listen to stat calculation results (e.g. send to Discord)
+@EventHandler
+public void onStatCalculated(StatCalculatedEvent event) {
+    String result = event.getStatResult().formattedString();
+    CommandSender requester = event.getRequester();
+    // send to Discord, log it, etc.
+}
+
+// Cancel stat sharing
+@EventHandler
+public void onStatShared(StatSharedEvent event) {
+    event.setCancelled(true); // prevent broadcast to all players
+    // send to a specific channel instead
+}
 ```
 
 &nbsp;
 
-## Author Info
-I am a relatively new programmer, and this is one of my first projects. I greatly enjoyed making it, 
-and I tried to make it as efficient as I could. If you have any questions, remarks, or suggestions, 
-please let me know! You can find me [here](https://github.com/Artemis-the-gr8) on GitHub. 
+## Migrating from PlayerStats
+
+If you were using the original PlayerStats plugin, note these changes:
+
+| What | Original | PlayerStatsRemake |
+|---|---|---|
+| Plugin name | `PlayerStats` | `PlayerStatsRemake` |
+| Package | `com.artemis.the.gr8.playerstats` | `com.fernsehheft.playerstatsremake` |
+| API class | `PlayerStats.getAPI()` | `PlayerStatsRemake.getAPI()` |
+| Permissions | `playerstats.*` | `playerstatsremake.*` |
+| Java version | 16 | 17 |
+| Server API | Spigot | Paper (Spigot compatible) |
 
 &nbsp;
 
-## Licence
-PlayerStats is licenced under the MIT licence. Please see [LICENCE](LICENSE) for more information.
+## Credits & License
+
+- **Original Plugin:** [PlayerStats](https://github.com/itHotL/PlayerStats) by [Artemis_the_gr8](https://github.com/Artemis-the-gr8) — all original design, concept and implementation
+- **This Fork:** Maintained by [Fernsehheft](https://github.com/Fernsehheft)
+- **License:** MIT — see [LICENSE](LICENSE) for details

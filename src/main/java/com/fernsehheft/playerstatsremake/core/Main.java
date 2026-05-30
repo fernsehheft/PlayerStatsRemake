@@ -52,14 +52,28 @@ public final class Main extends JavaPlugin implements PlayerStatsRemake {
         // register the listener
         Bukkit.getPluginManager().registerEvents(new JoinListener(), this);
 
-        // finish up
-        this.getLogger().info("Enabled PlayerStatsRemake!");
+        // Pretty startup banner
+        String version = this.getPluginMeta().getVersion();
+        getLogger().info("*---------------------------------------------*");
+        getLogger().info("|   PlayerStats  R E M A K E   v" + version + "        |");
+        getLogger().info("|   A fork of PlayerStats by Artemis_the_gr8  |");
+        getLogger().info("|   https://github.com/itHotL/PlayerStats      |");
+        getLogger().info("*---------------------------------------------*");
+        getLogger().info("| + Folia support                               |");
+        getLogger().info("| + NPE fix for new entity stats                |");
+        getLogger().info("| + DiscordSRV events                           |");
+        getLogger().info("| + Fast startup (no blocking delay)            |");
+        getLogger().info("*---------------------------------------------*");
+        getLogger().info("  Ready!");
     }
 
     @Override
     public void onDisable() {
         closables.forEach(Closable::close);
-        this.getLogger().info("Disabled PlayerStatsRemake!");
+        getLogger().info("");
+        getLogger().info(" PlayerStatsRemake has been disabled. Goodbye!");
+        getLogger().info(" Thank you for using PlayerStatsRemake.");
+        getLogger().info("");
     }
 
     public void reloadPlugin() {

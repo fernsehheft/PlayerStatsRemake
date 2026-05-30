@@ -7,8 +7,13 @@ import org.jetbrains.annotations.NotNull;
 /**
  * The outgoing API that represents the core functionality of PlayerStatsRemake!
  *
- * <p>To work with it, call PlayerStatsRemake.{@link #getAPI()}
- * and get an instance of PlayerStatsRemake.
+ * <p><b>PlayerStatsRemake</b> is a fork of the original
+ * <a href="https://github.com/itHotL/PlayerStats">PlayerStats</a> plugin
+ * by <a href="https://github.com/Artemis-the-gr8">Artemis_the_gr8</a>.
+ * All original design and concept belongs to the original author.
+ *
+ * <p>To work with the API, call {@link #getAPI()} to get an instance
+ * of PlayerStatsRemake, then access further methods from there.
  *
  * @see StatManager
  * @see StatTextFormatter
