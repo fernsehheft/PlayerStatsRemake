@@ -268,6 +268,29 @@ public final class LanguageKeyHandler extends YamlFileHandler {
         }
     }
 
+    public @NotNull String getTimeUnitShortLabel(Unit unit) {
+        String key = switch (unit) {
+            case DAY -> "time.day.short";
+            case HOUR -> "time.hour.short";
+            case MINUTE -> "time.minute.short";
+            case SECOND -> "time.second.short";
+            default -> null;
+        };
+        if (key != null) {
+            String value = super.getFileConfiguration().getString(key);
+            if (value != null) {
+                return value;
+            }
+        }
+        return switch (unit) {
+            case DAY -> "d";
+            case HOUR -> "h";
+            case MINUTE -> "m";
+            case SECOND -> "s";
+            default -> "?";
+        };
+    }
+
     private @NotNull HashMap<Statistic, String> generateStatisticKeys() {
         //get the enum names for all statistics first
         HashMap<Statistic, String> statNames = new HashMap<>(Statistic.values().length);

@@ -11,12 +11,12 @@ Here is the complete list of all issues we inherited from the original plugin.
 - [x] **#173** - Feature: Support Folia (Fixed using GlobalRegionScheduler)
 - [x] **#166 & #165 & #97** - Feature: API Events for DiscordSRV Alert Usage (Fixed via `StatCalculatedEvent` & `StatSharedEvent`)
 - [x] **#164** - Bug: Startup delay on Purpur/Paper 1.21+ (Fixed by delaying metrics setup)
+- [x] **#151** - Ability to modify time display (Added time.day.short etc. to language.yml)
 - [x] **#136** - Total amount of all mined blocks (without specifying a block)
 - [x] **#160 & #85** - Option to pull data from files and send it to MySQL database
 
 ## 🟡 Open (Bugfixes & Quality of Life)
 - [ ] **#154** - Add pagination / more than top 10
-- [ ] **#151** - Ability to modify time display
 - [ ] **#134** - Make a language file for plugin messages
 - [ ] **#133** - Add hovertext to explain the secret birthday theme
 - [ ] **#132** - Make config setting to set specific themes
