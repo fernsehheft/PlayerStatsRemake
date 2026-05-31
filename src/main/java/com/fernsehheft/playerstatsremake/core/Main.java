@@ -225,7 +225,7 @@ public final class Main extends JavaPlugin implements PlayerStatsRemake {
     @Override
     public @NotNull String getVersion() {
         // Use getPluginMeta() instead of deprecated getDescription() (PR #170)
-        return String.valueOf(this.getPluginMeta().getVersion().charAt(0));
+        return this.getPluginMeta().getVersion();
     }
 
     @Override
