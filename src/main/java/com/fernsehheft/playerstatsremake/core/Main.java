@@ -92,6 +92,7 @@ public final class Main extends JavaPlugin implements PlayerStatsRemake {
         getLogger().info("| + Fast startup                                |");
         getLogger().info("*---------------------------------------------*");
         getLogger().info("Started in " + (System.currentTimeMillis() - startTime) + "ms!");
+        getLogger().info("Maintained by Fernsehheft & Djtmk1 " );
     }
 
     @Override

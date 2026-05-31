@@ -182,5 +182,5 @@ If you were using the original PlayerStats plugin, note these changes:
 ## Credits & License
 
 - **Original Plugin:** [PlayerStats](https://github.com/itHotL/PlayerStats) by [Artemis_the_gr8](https://github.com/Artemis-the-gr8) — all original design, concept and implementation
-- **This Fork:** Maintained by [Fernsehheft](https://github.com/Fernsehheft)
+- **This Fork:** Maintained by [ Fernsehheft](https://github.com/Fernsehheft) & [Djtmk1](https://github.com/djtmk1) 
 - **License:** MIT — see [LICENSE](LICENSE) for details
