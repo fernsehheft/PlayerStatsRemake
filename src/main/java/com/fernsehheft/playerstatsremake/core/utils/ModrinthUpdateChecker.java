@@ -96,7 +96,7 @@ public final class ModrinthUpdateChecker {
     String local = plugin.getPluginMeta().getVersion();
     Component message = OutputManager.getInstance()
         .updateAvailableMessage(local, remote, getDownloadUrl());
-    Bukkit.getGlobalRegionScheduler().run(plugin, task -> player.sendMessage(message));
+    Bukkit.getGlobalRegionScheduler().run(plugin, task -> OutputManager.getInstance().sendToCommandSender(player, message));
   }
 
   private void checkForUpdateAsync() {
