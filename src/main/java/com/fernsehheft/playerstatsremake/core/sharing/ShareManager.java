@@ -86,7 +86,7 @@ public final class ShareManager implements Reloadable {
     }
 
     public boolean senderHasPermission(CommandSender sender) {
-        return !(sender instanceof ConsoleCommandSender) && sender.hasPermission("playerstats.share");
+        return !(sender instanceof ConsoleCommandSender) && sender.hasPermission("playerstatsremake.share");
     }
 
     public int saveStatResult(String playerName, TextComponent statResult) {

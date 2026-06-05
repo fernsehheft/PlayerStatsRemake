@@ -27,7 +27,7 @@ public class ColorCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        if (!player.hasPermission("playerstats.color")) {
+        if (!player.hasPermission("playerstatsremake.color")) {
             outputManager.sendToCommandSender(player, Component.text("You do not have permission to use this command!").color(NamedTextColor.RED));
             return true;
         }

@@ -66,7 +66,7 @@ public final class StatCommand implements CommandExecutor {
             outputManager.sendExamples(sender);
         }
         else if (args[0].equalsIgnoreCase("export")) {
-            if (sender.hasPermission("playerstats.admin")) {
+            if (sender.hasPermission("playerstatsremake.admin")) {
                 if (args.length > 1 && args[1].equalsIgnoreCase("mysql")) {
                     sender.sendMessage("§aStarting MySQL export in background...");
                     com.fernsehheft.playerstatsremake.core.Main.getDatabaseManager().exportAllStats();
